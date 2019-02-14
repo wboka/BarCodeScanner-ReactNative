@@ -35,18 +35,18 @@ class FadeInView extends React.Component {
 }
 
 export default class App extends React.Component {
-  info = {
+	info = {
 		version: Platform.Version,
 		maintainText: `Built & maintained by YOUR_NAME_HERE\nFor support, REPLACE_WITH_YOUR_CONTACT_INFO`
-  };
+	};
 
-  state = {
+	state = {
 		hasCameraPermission: null,
 		isScanning: false,
 		lineOpacity: new Animated.Value(1)
-  };
+	};
 
-  componentDidMount() {
+	componentDidMount() {
 		this._requestCameraPermission();
 	}
 
@@ -66,11 +66,8 @@ export default class App extends React.Component {
 		if (this.state.isScanning) {
 			Vibration.vibrate(500);
 
-      // Remove this once you have implemented the website JS
-      Alert.alert(
-				"Data Scanned",
-				`${JSON.stringify(data, null, 2)}`
-      );
+			// Remove this once you have implemented the website JS
+			Alert.alert("Data Scanned", `${JSON.stringify(data, null, 2)}`);
 
 			this.webView.postMessage(JSON.stringify(data));
 		}
@@ -95,14 +92,14 @@ export default class App extends React.Component {
 		NetInfo.getConnectionInfo().then(connectionInfo => {
 			Alert.alert(
 				"BARCODE_SCANNER",
-				`OS Version ${this.info.version}\nNetwork: ${connectionInfo.type}\nCellular: ${connectionInfo.effectiveType}\n\n${
-					this.info.maintainText
-				}`
+				`OS Version ${this.info.version}\nNetwork: ${connectionInfo.type}\nCellular: ${
+					connectionInfo.effectiveType
+				}\n\n${this.info.maintainText}`
 			);
 		});
-  };
+	};
 
-  reload = () => {
+	reload = () => {
 		this.webView.reload();
 	};
 
@@ -126,12 +123,7 @@ export default class App extends React.Component {
 						/>
 					</View>
 				)}
-				<WebView
-					useWebKit={true}
-					ref={v => (this.webView = v)}
-					source={{ uri: URL }}
-					javaScriptEnabled={true}
-				/>
+				<WebView useWebKit={true} ref={v => (this.webView = v)} source={{ uri: URL }} javaScriptEnabled={true} />
 				<View
 					style={{
 						flexDirection: "row",
