@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Animated, Button, Text, View, StyleSheet, Alert, WebView, Platform, NetInfo } from "react-native";
+import { Animated, Button, Text, View, StyleSheet, Alert, WebView, Platform, NetInfo, Vibration } from "react-native";
 import { Constants, BarCodeScanner, Permissions } from "expo";
 
 const URL = "https://example.com";
@@ -64,6 +64,8 @@ export default class App extends React.Component {
 		});
 
 		if (this.state.isScanning) {
+			Vibration.vibrate(500);
+
       // Remove this once you have implemented the website JS
       Alert.alert(
 				"Data Scanned",
